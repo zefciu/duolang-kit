@@ -33,9 +33,13 @@ export class Paragraph extends DlElement {
 export class Word extends DlElement {
   content: string;
 
-  constructor(chars: Array<string>) {
+  constructor(content: Array<string> | string) {
     super();
-    this.content = chars.join('');
+    if (content instanceof Array) {
+      this.content = content.join('');
+    } else {
+      this.content = content;
+    }
   }
 
   render(context: DlContext): string {
@@ -45,6 +49,10 @@ export class Word extends DlElement {
     return this.content;
   }
 
+  concat(...words: Word[]): Word {
+    return new Word(this.content.concat(...words.map(w => w.content)));
+  }
+
 }
 
 export class Link extends DlElement {
@@ -52,13 +60,14 @@ export class Link extends DlElement {
   word: Word;
 
   constructor(linkKey: Word, word: Word) {
-    super()
+    super();
     this.linkKey = linkKey.content; // Parsed as a 'Word', but we don’t want it to be transcribed
     this.word = word;
 
   }
 
   render(context: DlContext): string {
+    console.log(this.word);
     return `<a href="${context.urlBuilder.build(this.linkKey)}">${this.word.render(context)}</a>`
   }
 
