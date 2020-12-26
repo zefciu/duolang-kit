@@ -1,7 +1,14 @@
 
 document = content:(block *) { return new Document(content) }
 
-block = paragraph
+block = header / paragraph
+
+
+headerSign = ('=' +)
+
+header = sign: headerSign content: (inline +) headerSign {
+    return new Header(content, sign.length)
+}
 
 paragraph = content:(inline +) (linesep ?) { return new Paragraph(content) }
 
@@ -9,7 +16,7 @@ linesep = '\n' ('\n' +)
 
 inline = word / link
 
-character = (! '[') (! '|') (! ']') c:. { return c }
+character = (! '[') (! '|') (! ']') (! '=') c:. { return c }
 
 word = chars:character+ {return new Word(chars)}
 

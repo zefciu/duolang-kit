@@ -42,3 +42,23 @@ test('Should parse a prefix-suffix link', () => {
   };
   expect(text.render(context)).toBe('<p><a href="https://pl.wiktionary.com/wiki/გაკეთება">გააკეთებს</a></p>');
 });
+
+test('Should render a header', () => {
+  const text: Document = parse('==[და|დამი|სხ|მა|ი] [სმა|დამალევინე]==') as Document;
+  expect(text).toBeInstanceOf(Document);
+  const context: DlContext = {
+    urlBuilder: new TemplateUrlBuilder('https://pl.wiktionary.com/wiki/{}'),
+    transcriber: null,
+  };
+  expect(text.render(context)).toBe('<h2><a href="https://pl.wiktionary.com/wiki/დასხმა">დამისხი</a> <a href="https://pl.wiktionary.com/wiki/სმა">დამალევინე</a></h2>');
+});
+
+test('Should render a simple header', () => {
+  const text: Document = parse('==dupa==') as Document;
+  expect(text).toBeInstanceOf(Document);
+  const context: DlContext = {
+    urlBuilder: new TemplateUrlBuilder('https://pl.wiktionary.com/wiki/{}'),
+    transcriber: null,
+  };
+  expect(text.render(context)).toBe('<h2>dupa</h2>');
+});

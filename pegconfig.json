@@ -1,6 +1,6 @@
 {
     "tspegjs": {
         "noTslint": false,
-        "customHeader": "import {Document, Paragraph, Word, Link} from './elements';"
+        "customHeader": "import {Document, Header, Link, Paragraph, Word} from './elements';"
     }
 }

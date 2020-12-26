@@ -67,8 +67,23 @@ export class Link extends DlElement {
   }
 
   render(context: DlContext): string {
-    console.log(this.word);
     return `<a href="${context.urlBuilder.build(this.linkKey)}">${this.word.render(context)}</a>`
+  }
+}
+
+export class Header extends DlElement {
+  content: Array<DlElement>;
+  level: number;
+
+  constructor(content: Array<DlElement>, level: number) {
+    super();
+    this.content = content;
+    this.level = level;
+  }
+
+  render(context: DlContext): string {
+    const content: string = (this.content.map(el => el.render(context))).join('');
+    return `<h${this.level}>${content}</h${this.level}>`;
   }
 
 }
