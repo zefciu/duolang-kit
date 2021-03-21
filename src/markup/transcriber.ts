@@ -27,8 +27,8 @@ class LetterByLetterTranscriberProvider implements TranscriberProvider {
     const get = (k: string) => {
       const v = this.map[k];
       return v === undefined ? k : v;
-    }
-    return input.split('').map((c: string) => get(c)).join('')
+    };
+    return input.split('').map((c: string) => get(c)).join('');
   }
 }
 
@@ -67,4 +67,4 @@ export const polish_transcriber = new LetterByLetterTranscriberProvider({
     'ჯ': 'dż',
     'ჰ': 'h',
   }
-).get()
+).get();

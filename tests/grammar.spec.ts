@@ -33,6 +33,16 @@ test('Should parse a suffix link', () => {
   expect(text.render(context)).toBe('<p><a href="https://pl.wiktionary.com/wiki/მთვარე">მთვარის</a></p>');
 });
 
+test('Should parse a suffix link with empty', () => {
+  const text: Document = parse('[ამდენ|ი|]') as Document;
+  expect(text).toBeInstanceOf(Document);
+  const context: DlContext = {
+    urlBuilder: new TemplateUrlBuilder('https://pl.wiktionary.com/wiki/{}'),
+    transcriber: null,
+  };
+  expect(text.render(context)).toBe('<p><a href="https://pl.wiktionary.com/wiki/ამდენი">ამდენ</a></p>');
+});
+
 test('Should parse a prefix-suffix link', () => {
   const text: Document = parse('[გა|გაა|კეთებ|ა|ს]') as Document;
   expect(text).toBeInstanceOf(Document);
