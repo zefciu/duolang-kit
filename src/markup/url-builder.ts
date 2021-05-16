@@ -1,15 +1,6 @@
-export type urlBuilder = {
-  build: (input: string) => string;
-}
+export type urlBuilder = (input: string) => string;
 
-export class TemplateUrlBuilder {
-  template: string;
 
-  constructor(template: string) {
-    this.template = template;
-  }
-
-  build(input: string) {
-    return this.template.replace(/{}/, input)
-  }
+export function templateUrlBuilder(template: string) {
+  return (input: string) => template.replace(/{}/, input)
 }

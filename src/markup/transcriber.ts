@@ -11,6 +11,10 @@ interface StringMap {
 }
 
 
+export function identity<T> (v: T): T {
+  return v
+}
+
 class LetterByLetterTranscriberProvider implements TranscriberProvider {
 
   map: StringMap;
