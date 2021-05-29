@@ -18,9 +18,10 @@ export function basicHTMLRenderer(el: DlElement, context: DlContext<string>): st
     case DlElementType.LINK:
       return `<a href="${context.urlBuilder(el.linkKey)}">${render(el.word, context)}</a>`
     case DlElementType.PARAGRAPH:
-      return '<p>' + el.content.map(child => render(child, context)).join('') + '</p>'
+      return '<p>' + el.content.map(child => render(child, context)).join('<br>\n') + '</p>'
     case DlElementType.WORD:
       return context.transcriber(el.content);
+    case DlElementType.VERSE:
+      return el.content.map(child => render(child, context)).join('');
   }
-
 }

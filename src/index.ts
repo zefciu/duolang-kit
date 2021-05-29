@@ -1,4 +1,4 @@
-export {TemplateUrlBuilder} from "./markup/url-builder";
-export {DlContext} from "./markup/context";
-export {Document} from "./markup/elements";
-export {parse} from "./markup/grammar";
+export {templateUrlBuilder} from "./markup/url-builder";
+export {parse, SyntaxError} from "./markup/grammar";
+export {render} from "./markup/renderer";
+export {DlElement} from "./markup/elements";

@@ -4,11 +4,12 @@ export enum DlElementType {
   WORD,
   LINK,
   HEADER,
+  VERSE
 }
 
 
 export type DlElement = {
-  type: DlElementType.DOCUMENT | DlElementType.PARAGRAPH,
+  type: DlElementType.DOCUMENT | DlElementType.PARAGRAPH | DlElementType.VERSE
   content: DlElement[],
 } | {
   type: DlElementType.WORD,
@@ -46,6 +47,13 @@ export function link(linkKey: string, word: DlElement): DlElement {
 export function paragraph(content: DlElement[]): DlElement {
   return {
     type: DlElementType.PARAGRAPH,
+    content: content
+  };
+}
+
+export function verse(content: DlElement[]): DlElement {
+  return {
+    type: DlElementType.VERSE,
     content: content
   };
 }

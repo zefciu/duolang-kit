@@ -51,3 +51,13 @@ test('Should render a simple header', () => {
   const text = parse('==dupa==') ;
   expect(render(text, context)).toBe('<h2>dupa</h2>');
 });
+
+test('Should render a paragraph', () => {
+  const text = parse(`ერთი
+ორი
+
+სამი`) ;
+  expect(render(text, context)).toBe(`<p>ერთი<br>
+ორი</p>
+<p>სამი</p>`);
+});

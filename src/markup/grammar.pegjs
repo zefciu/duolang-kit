@@ -1,22 +1,23 @@
-
 document = content:(block *) { return document(content) }
 
 block = header / paragraph
 
-
 headerSign = ('=' +)
 
-header = sign: headerSign content: (inline +) headerSign {
+header = sign: headerSign content: (inline +) headerSign linesep* {
     return header(content, sign.length)
 }
 
-paragraph = content:(inline +) (linesep ?) { return paragraph(content) }
 
-linesep = '\n' ('\n' +)
+paragraph = content:(verse +) (linesep*)  { return paragraph(content) }
+
+verse = content:(inline +) (linesep ?) { return verse(content) }
+
+linesep = '\n'
 
 inline = word / link
 
-character = (! '[') (! '|') (! ']') (! '=') c:. { return c }
+character = (! '[') (! '|') (! ']') (! '=') (! linesep) c:. { return c }
 
 word = chars:character+ {return word(chars)}
 
