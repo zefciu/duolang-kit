@@ -1,13 +1,13 @@
 import {DlElement, DlElementType} from "./elements";
 import {DlContext} from "./context";
 
-export function render<T>(el: DlElement, context: DlContext<T>): T {
-  return context.renderer(el, context);
+export function render<T, TExtra>(el: DlElement, context: DlContext<T, TExtra>, extras?: TExtra|undefined): T {
+  return context.renderer(el, context, extras);
 }
 
-export type renderer<T> = (el: DlElement, context: DlContext<T>) => T
+export type renderer<T, TExtra> = (el: DlElement, context: DlContext<T, TExtra>, extras?: TExtra|undefined) => T
 
-export function basicHTMLRenderer(el: DlElement, context: DlContext<string>): string {
+export function basicHTMLRenderer(el: DlElement, context: DlContext<string, undefined>): string {
 
   switch (el.type) {
     case DlElementType.DOCUMENT:
